@@ -141,7 +141,7 @@ SET
 WHERE 
   id = 4;
   
-/** Delete data in table */
+/** Delete data from table */
 
 DELETE FROM 
   employee_hobby 
