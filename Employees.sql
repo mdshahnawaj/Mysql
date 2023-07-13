@@ -141,7 +141,7 @@ SET
 WHERE 
   id = 4;
   
-/** Delete data from table */
+/** Delete data in table */
 
 DELETE FROM 
   employee_hobby 
@@ -195,42 +195,42 @@ FROM
 /** Create a select single query to get all employee name, all hobby_name in single column */
 
 SELECT 
-  Concat(first_name, ' ', last_name) AS "Name And Hobby" 
+  Concat(first_name, ' ', last_name) AS "Name And Hobbies" 
 FROM 
   employee 
 UNION ALL 
 SELECT 
-  name 
+  name
 FROM 
   hobby;
 
 /** Create a select query to get employee name, his/her employee_salary */
 
 SELECT 
-  Concat(first_name, ' ', last_name) AS "Employee Name", 
-  salary As Salary 
+  Concat(e.first_name, ' ', e.last_name) AS "Employee Name", 
+  salary AS Salary 
 FROM 
-  employee 
-  INNER JOIN employee_salary ON employee.id = employee_salary.fk_employee_id;
+  employee AS e
+  INNER JOIN employee_salary AS es ON e.id = es.fk_employee_id;
 
 /** Create a select query to get employee name, total salary of employee, hobby 
 name(comma-separated - you need to use subquery for hobby name) */
 
 SELECT 
   Concat(
-    employee.first_name, ' ', employee.last_name
-  ) AS "Employees Name", 
+    e.first_name, ' ', e.last_name
+  ) AS "Employee", 
   Sum(salary) AS "Total Salary", 
   (
     SELECT 
-      Group_concat(DISTINCT hobby.name) 
+      Group_concat(DISTINCT h.name) 
     FROM 
-      hobby 
-      INNER JOIN employee_hobby ON employee_hobby.fk_employee_hobby = hobby.id 
-      AND employee_hobby.fk_employee_id = employee.id
+      hobby AS h 
+      INNER JOIN employee_hobby AS eh ON eh.fk_employee_hobby = h.id 
+      AND eh.fk_employee_id = e.id
   ) AS Hobbies 
 FROM 
-  employee 
-  LEFT JOIN employee_salary ON employee.id = fk_employee_id 
+  employee AS e 
+  LEFT JOIN employee_salary ON e.id = fk_employee_id 
 GROUP BY 
-  employee.id;
+  e.id;
