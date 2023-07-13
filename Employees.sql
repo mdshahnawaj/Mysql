@@ -52,7 +52,7 @@ CREATE TABLE employee_hobby (
 
 /** Insert data in hobby table */
 
-INSERT INTO hobby (NAME) 
+INSERT INTO hobby (name) 
 VALUES 
   ("Dancing"), 
   ("Singing"), 
@@ -66,21 +66,11 @@ INSERT INTO employee (
   first_name, last_name, age, mobile_number, address
 ) 
 VALUES 
-  (
-    "Mohan", "Kumar", 23, "8877665544", "Banswara"
-  ), 
-  (
-    "Sohan", "Kumar", 24, "2877663544", "Talwara"
-  ), 
-  (
-    "Rohan", "Jain", 23, "8877665534", "Banswara"
-  ), 
-  (
-    "Garvit", "Gupta", 25, "3277665544", "udaipur"
-  ), 
-  (
-    "Kartik", "Panchal", 23, "1177665544", "Ahmedabad"
-  );
+  ("Mohan", "Kumar", 23, "8877665544", "Banswara"), 
+  ("Sohan", "Kumar", 24, "2877663544", "Talwara"), 
+  ("Rohan", "Jain", 23, "8877665534", "Banswara"), 
+  ("Garvit", "Gupta", 25, "3277665544", "udaipur"), 
+  ("Kartik", "Panchal", 23, "1177665544", "Ahmedabad");
 
 /** Insert data in employee_salary table */
 
@@ -126,7 +116,7 @@ VALUES
 UPDATE 
   hobby 
 SET 
-  NAME = "Shopping" 
+  name = "Shopping" 
 WHERE 
   id = 1;
   
@@ -175,10 +165,10 @@ WHERE
   
 /** Truncate all table */
 
--- TRUNCATE hobby;
--- TRUNCATE employee_hobby;
--- TRUNCATE employee_salary;
--- TRUNCATE employee;
+TRUNCATE hobby;
+TRUNCATE employee_hobby;
+TRUNCATE employee_salary;
+TRUNCATE employee;
 
 /** Select queries to get a hobby, employee, employee_salary,employee_hobby */
 
@@ -210,7 +200,7 @@ FROM
   employee 
 UNION ALL 
 SELECT 
-  NAME 
+  name 
 FROM 
   hobby;
 
@@ -218,7 +208,7 @@ FROM
 
 SELECT 
   Concat(first_name, ' ', last_name) AS "Employee Name", 
-  Salary 
+  salary As Salary 
 FROM 
   employee 
   INNER JOIN employee_salary ON employee.id = employee_salary.fk_employee_id;
@@ -229,11 +219,11 @@ name(comma-separated - you need to use subquery for hobby name) */
 SELECT 
   Concat(
     employee.first_name, ' ', employee.last_name
-  ) AS "Employee Name", 
+  ) AS "Employees Name", 
   Sum(salary) AS "Total Salary", 
   (
     SELECT 
-      Group_concat(DISTINCT hobby.NAME) 
+      Group_concat(DISTINCT hobby.name) 
     FROM 
       hobby 
       INNER JOIN employee_hobby ON employee_hobby.fk_employee_hobby = hobby.id 
