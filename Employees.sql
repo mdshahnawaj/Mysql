@@ -111,7 +111,7 @@ VALUES
   (5, 1), 
   (5, 5);
 
-/** Update data in table */
+/** Update hobby name from hobby table */
 
 UPDATE 
   hobby 
@@ -119,6 +119,8 @@ SET
   name = "Shopping" 
 WHERE 
   id = 1;
+
+/** Update employee address from employee table */
   
 UPDATE 
   employee 
@@ -126,6 +128,8 @@ SET
   address = "Canada" 
 WHERE 
   id = 1;
+
+/** Update employee salary from employee_salary table */
   
 UPDATE 
   employee_salary 
@@ -133,7 +137,9 @@ SET
   salary = 15000 
 WHERE 
   id = 3;
-  
+
+/** Update fk_employee_hobby from employee_hobby table */
+
 UPDATE 
   employee_hobby 
 SET 
@@ -141,23 +147,29 @@ SET
 WHERE 
   id = 4;
   
-/** Delete data in table */
+/** Delete record from employee_hobby table */
 
 DELETE FROM 
   employee_hobby 
 WHERE 
   id = 9;
-  
+
+/** Delete record from hobby table */
+
 DELETE FROM 
   hobby 
 WHERE 
   id = 6;
-  
+
+/** Delete record from employee_salary table */
+
 DELETE FROM 
   employee_salary 
 WHERE 
   id = 15;
-  
+
+/** Delete record from employee table */
+
 DELETE FROM 
   employee 
 WHERE 
@@ -170,27 +182,21 @@ TRUNCATE employee_hobby;
 TRUNCATE employee_salary;
 TRUNCATE employee;
 
-/** Select queries to get a hobby, employee, employee_salary,employee_hobby */
+/** Print all data from hobby table */
 
-SELECT 
-  * 
-FROM 
-  hobby;
-  
-SELECT 
-  * 
-FROM 
-  employee;
-  
-SELECT 
-  * 
-FROM 
-  employee_salary;
-  
-SELECT 
-  * 
-FROM 
-  employee_hobby;
+SELECT * FROM hobby;
+
+/** Print all data from employee table */
+
+SELECT * FROM employee;
+
+/** Print all data from employee_salary table */
+
+SELECT * FROM employee_salary;
+
+/** Print all data from employee_hobby */
+
+SELECT * FROM employee_hobby;
   
 /** Create a select single query to get all employee name, all hobby_name in single column */
 
@@ -200,7 +206,7 @@ FROM
   employee 
 UNION ALL 
 SELECT 
-  name
+  name 
 FROM 
   hobby;
 
@@ -210,27 +216,19 @@ SELECT
   Concat(e.first_name, ' ', e.last_name) AS "Employee Name", 
   salary AS Salary 
 FROM 
-  employee AS e
-  INNER JOIN employee_salary AS es ON e.id = es.fk_employee_id;
+  employee e
+  INNER JOIN employee_salary es ON e.id = es.fk_employee_id;
 
 /** Create a select query to get employee name, total salary of employee, hobby 
 name(comma-separated - you need to use subquery for hobby name) */
 
 SELECT 
-  Concat(
-    e.first_name, ' ', e.last_name
-  ) AS "Employee", 
+  Concat(e.first_name, ' ', e.last_name) AS "Employee", 
   Sum(salary) AS "Total Salary", 
-  (
-    SELECT 
-      Group_concat(DISTINCT h.name) 
-    FROM 
-      hobby AS h 
-      INNER JOIN employee_hobby AS eh ON eh.fk_employee_hobby = h.id 
-      AND eh.fk_employee_id = e.id
-  ) AS Hobbies 
+  (SELECT Group_concat(DISTINCT h.name) FROM hobby h 
+      INNER JOIN employee_hobby eh ON eh.fk_employee_hobby = h.id 
+      AND eh.fk_employee_id = e.id) AS Hobbies 
 FROM 
-  employee AS e 
-  LEFT JOIN employee_salary ON e.id = fk_employee_id 
-GROUP BY 
-  e.id;
+  employee e 
+  LEFT JOIN employee_salary es ON e.id = es.fk_employee_id 
+GROUP BY e.id;
