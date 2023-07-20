@@ -40,7 +40,7 @@ CREATE TABLE `employee_salary` (
 PRIMARY KEY (`id`),
 KEY `fk_employee_id` (`fk_employee_id`),
 CONSTRAINT `employee_salary_ibfk_1` FOREIGN KEY (`fk_employee_id`) REFERENCES `employee` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 /** Create table employee_hobby */
 
@@ -53,7 +53,7 @@ KEY `fk_employee_id` (`fk_employee_id`),
 KEY `fk_employee_hobby` (`fk_employee_hobby`),
 CONSTRAINT `employee_hobby_ibfk_1` FOREIGN KEY (`fk_employee_id`) REFERENCES `employee` (`id`),
 CONSTRAINT `employee_hobby_ibfk_2` FOREIGN KEY (`fk_employee_hobby`) REFERENCES `hobby` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 /** Insert data in hobby table */
 
