@@ -217,7 +217,7 @@ SELECT
   salary AS employee_salary 
 FROM 
   employee e
-  INNER JOIN employee_salary es ON e.id = es.fk_employee_id;
+  LEFT JOIN employee_salary es ON e.id = es.fk_employee_id;
 
 /** Create a select query to get employee name, total salary of employee, hobby 
 name(comma-separated - you need to use subquery for hobby name) */
