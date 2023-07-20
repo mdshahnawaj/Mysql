@@ -6,11 +6,11 @@
 
 /** Create database */
 
-CREATE DATABASE employee;
+CREATE DATABASE employeeses;
 
 /** Use selected database */
 
-USE employee;
+USE employeeses;
 
 /** Create table hobby */
 
