@@ -32,23 +32,28 @@ CREATE TABLE employee (
 
 /** Create table employee_salary */
 
-CREATE TABLE employee_salary (
-  id INT PRIMARY KEY NOT NULL auto_increment, 
-  salary DECIMAL(10, 2) NOT NULL, 
-  salary_date DATE NOT NULL, 
-  fk_employee_id INT, 
-  CONSTRAINT fk_employee_id FOREIGN KEY(fk_employee_id) REFERENCES employee(id)
-);
+CREATE TABLE `employee_salary` (
+`id` int NOT NULL AUTO_INCREMENT,
+`salary` decimal(10,2) NOT NULL,
+`date` date NOT NULL,
+`fk_employee_id` int DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `fk_employee_id` (`fk_employee_id`),
+CONSTRAINT `employee_salary_ibfk_1` FOREIGN KEY (`fk_employee_id`) REFERENCES `employee` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 /** Create table employee_hobby */
 
-CREATE TABLE employee_hobby (
-  id INT PRIMARY KEY NOT NULL auto_increment, 
-  fk_employee_id INT, 
-  CONSTRAINT fk_employee_id FOREIGN KEY(fk_employee_id) REFERENCES employee(id), 
-  fk_employee_hobby_id INT, 
-  CONSTRAINT fk_employee_hobby_id FOREIGN KEY(fk_employee_hobby_id) REFERENCES hobby(id)
-);
+CREATE TABLE `employee_hobby` (
+`id` int NOT NULL AUTO_INCREMENT,
+`fk_employee_id` int DEFAULT NULL,
+`fk_employee_hobby` int DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `fk_employee_id` (`fk_employee_id`),
+KEY `fk_employee_hobby` (`fk_employee_hobby`),
+CONSTRAINT `employee_hobby_ibfk_1` FOREIGN KEY (`fk_employee_id`) REFERENCES `employee` (`id`),
+CONSTRAINT `employee_hobby_ibfk_2` FOREIGN KEY (`fk_employee_hobby`) REFERENCES `hobby` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 /** Insert data in hobby table */
 
