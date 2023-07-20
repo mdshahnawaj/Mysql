@@ -6,11 +6,11 @@
 
 /** Create database */
 
-CREATE DATABASE employees;
+CREATE DATABASE employee;
 
 /** Use selected database */
 
-USE employees;
+USE employee;
 
 /** Create table hobby */
 
@@ -27,7 +27,7 @@ CREATE TABLE employee (
   last_name VARCHAR(45) NOT NULL, 
   age INT NOT NULL, 
   mobile_number VARCHAR(17) NOT NULL, 
-  address VARCHAR(70) NOT NULL
+  address VARCHAR(255) NOT NULL
 );
 
 /** Create table employee_salary */
@@ -35,7 +35,7 @@ CREATE TABLE employee (
 CREATE TABLE employee_salary (
   id INT PRIMARY KEY NOT NULL auto_increment, 
   salary DECIMAL(10, 2) NOT NULL, 
-  date DATE NOT NULL, 
+  salary_date DATE NOT NULL, 
   fk_employee_id INT, 
   FOREIGN KEY(fk_employee_id) REFERENCES employee(id)
 );
@@ -46,8 +46,8 @@ CREATE TABLE employee_hobby (
   id INT PRIMARY KEY NOT NULL auto_increment, 
   fk_employee_id INT, 
   FOREIGN KEY(fk_employee_id) REFERENCES employee(id), 
-  fk_employee_hobby INT, 
-  FOREIGN KEY(fk_employee_hobby) REFERENCES hobby(id)
+  fk_employee_hobby_id INT, 
+  FOREIGN KEY(fk_employee_hobby_id) REFERENCES hobby(id)
 );
 
 /** Insert data in hobby table */
@@ -74,7 +74,7 @@ VALUES
 
 /** Insert data in employee_salary table */
 
-INSERT INTO employee_salary (salary, date, fk_employee_id) 
+INSERT INTO employee_salary (salary, salary_date, fk_employee_id) 
 VALUES 
   (10000, "2023-01-05", 1), 
   (10000, "2023-02-05", 1), 
@@ -95,7 +95,7 @@ VALUES
 /** Insert data in employee_hobby table */
 
 INSERT INTO employee_hobby (
-  fk_employee_id, fk_employee_hobby
+  fk_employee_id, fk_employee_hobby_id
 ) 
 VALUES 
   (1, 1), 
@@ -214,7 +214,7 @@ FROM
 
 SELECT 
   Concat(e.first_name, ' ', e.last_name) AS "Employee Name", 
-  salary AS Salary 
+  salary AS employee_salary 
 FROM 
   employee e
   INNER JOIN employee_salary es ON e.id = es.fk_employee_id;
