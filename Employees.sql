@@ -6,27 +6,27 @@
 
 /** Create database */
 
-CREATE DATABASE employee;
+CREATE DATABASE employeeses;
 
 /** Use selected database */
 
-USE employee;
+USE employeeses;
 
 /** Create table hobby */
 
 CREATE TABLE hobby (
   id INT PRIMARY KEY NOT NULL auto_increment, 
-  name VARCHAR(45) NOT NULL
+  name VARCHAR(255) NOT NULL
 );
 
 /** Create table employee */
 
 CREATE TABLE employee (
   id INT PRIMARY KEY NOT NULL auto_increment, 
-  first_name VARCHAR(45) NOT NULL, 
-  last_name VARCHAR(45) NOT NULL, 
+  first_name VARCHAR(255) NOT NULL, 
+  last_name VARCHAR(255) NOT NULL, 
   age INT NOT NULL, 
-  mobile_number VARCHAR(17) NOT NULL, 
+  mobile_number VARCHAR(255) NOT NULL, 
   address VARCHAR(255) NOT NULL
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE employee_salary (
   salary DECIMAL(10, 2) NOT NULL, 
   salary_date DATE NOT NULL, 
   fk_employee_id INT, 
-  FOREIGN KEY(fk_employee_id) REFERENCES employee(id)
+  CONSTRAINT fk_employee_id FOREIGN KEY(fk_employee_id) REFERENCES employee(id)
 );
 
 /** Create table employee_hobby */
@@ -47,7 +47,7 @@ CREATE TABLE employee_hobby (
   fk_employee_id INT, 
   FOREIGN KEY(fk_employee_id) REFERENCES employee(id), 
   fk_employee_hobby_id INT, 
-  FOREIGN KEY(fk_employee_hobby_id) REFERENCES hobby(id)
+  CONSTRAINT fk_employee_hobby_id FOREIGN KEY(fk_employee_hobby_id) REFERENCES hobby(id)
 );
 
 /** Insert data in hobby table */
@@ -226,7 +226,7 @@ SELECT
   Concat(e.first_name, ' ', e.last_name) AS "Employee", 
   Sum(salary) AS "Total Salary", 
   (SELECT Group_concat(DISTINCT h.name) FROM hobby h 
-      INNER JOIN employee_hobby eh ON eh.fk_employee_hobby = h.id 
+      INNER JOIN employee_hobby eh ON eh.fk_employee_hobby_id = h.id 
       AND eh.fk_employee_id = e.id) AS Hobbies 
 FROM 
   employee e 
