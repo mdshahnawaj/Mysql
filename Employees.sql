@@ -16,17 +16,17 @@ USE employee;
 
 CREATE TABLE hobby (
   id INT PRIMARY KEY NOT NULL auto_increment, 
-  name VARCHAR(255) NOT NULL
+  name VARCHAR(45) NOT NULL
 );
 
 /** Create table employee */
 
 CREATE TABLE employee (
   id INT PRIMARY KEY NOT NULL auto_increment, 
-  first_name VARCHAR(255) NOT NULL, 
-  last_name VARCHAR(255) NOT NULL, 
+  first_name VARCHAR(45) NOT NULL, 
+  last_name VARCHAR(45) NOT NULL, 
   age INT NOT NULL, 
-  mobile_number VARCHAR(255) NOT NULL, 
+  mobile_number VARCHAR(17) NOT NULL, 
   address VARCHAR(255) NOT NULL
 );
 
