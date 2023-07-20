@@ -6,11 +6,11 @@
 
 /** Create database */
 
-CREATE DATABASE employeeses;
+CREATE DATABASE employee;
 
 /** Use selected database */
 
-USE employeeses;
+USE employee;
 
 /** Create table hobby */
 
@@ -45,7 +45,7 @@ CREATE TABLE employee_salary (
 CREATE TABLE employee_hobby (
   id INT PRIMARY KEY NOT NULL auto_increment, 
   fk_employee_id INT, 
-  FOREIGN KEY(fk_employee_id) REFERENCES employee(id), 
+  CONSTRAINT fk_employee_id FOREIGN KEY(fk_employee_id) REFERENCES employee(id), 
   fk_employee_hobby_id INT, 
   CONSTRAINT fk_employee_hobby_id FOREIGN KEY(fk_employee_hobby_id) REFERENCES hobby(id)
 );
